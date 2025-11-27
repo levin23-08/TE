@@ -1,16 +1,16 @@
 <!DOCTYPE html>
-<html lang="de">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>EnglishGalaxy – Modern Englisch lernen</title>
+    <title>EnglishGalaxy – Learn English with Games</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!-- Einfaches, modernes Design -->
+    <!-- Simple modern styling -->
     <style>
         * {
-            box-sizing: border-box;
             margin: 0;
             padding: 0;
+            box-sizing: border-box;
         }
 
         body {
@@ -25,14 +25,14 @@
             color: inherit;
         }
 
-        /* Header / Navigation */
+        /* Header */
         header {
             position: sticky;
             top: 0;
             z-index: 20;
             backdrop-filter: blur(16px);
-            background: rgba(15,23,42,0.85);
-            border-bottom: 1px solid rgba(148,163,184,0.3);
+            background: rgba(15,23,42,0.9);
+            border-bottom: 1px solid rgba(148,163,184,0.4);
         }
 
         .nav-container {
@@ -78,7 +78,7 @@
             font-size: 0.85rem;
         }
 
-        /* Generelles Layout */
+        /* Layout */
         main {
             max-width: 1200px;
             margin: 0 auto;
@@ -198,7 +198,7 @@
             margin-top: 4px;
         }
 
-        /* Karten & Grids */
+        /* Cards / grids */
         .grid-3 {
             display: grid;
             grid-template-columns: repeat(3, minmax(0,1fr));
@@ -233,9 +233,31 @@
             color: #38bdf8;
         }
 
-        /* Spiel-Bereich */
-        #game-container {
-            margin-top: 14px;
+        /* Game navigation */
+        .games-nav {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 18px;
+        }
+
+        .games-nav button {
+            padding: 8px 16px;
+            border-radius: 999px;
+            border: 1px solid #475569;
+            background: #020617;
+            color: #e5e7eb;
+            font-size: 0.85rem;
+            cursor: pointer;
+        }
+
+        .games-nav button:hover {
+            border-color: #38bdf8;
+        }
+
+        /* Game containers */
+        .game-block {
+            margin-top: 18px;
             background: #020617;
             border-radius: 18px;
             padding: 20px;
@@ -243,29 +265,40 @@
             box-shadow: 0 18px 45px rgba(8,47,73,0.9);
         }
 
-        #game-status {
+        .game-title {
+            font-size: 1.1rem;
+            margin-bottom: 6px;
+        }
+
+        .game-description {
+            font-size: 0.9rem;
+            color: #cbd5f5;
+            margin-bottom: 12px;
+        }
+
+        /* Quiz game */
+        #quiz-status {
             display: flex;
             justify-content: space-between;
             flex-wrap: wrap;
             gap: 10px;
             font-size: 0.9rem;
-            color: #e5e7eb;
-            margin-bottom: 12px;
+            margin-bottom: 10px;
         }
 
-        #game-question {
-            font-size: 1.05rem;
-            margin-bottom: 12px;
+        #quiz-question {
+            font-size: 1.02rem;
+            margin-bottom: 10px;
         }
 
-        #game-options {
+        #quiz-options {
             display: grid;
             grid-template-columns: repeat(2, minmax(0,1fr));
             gap: 10px;
-            margin-bottom: 12px;
+            margin-bottom: 10px;
         }
 
-        .game-option {
+        .quiz-option {
             padding: 10px 10px;
             border-radius: 12px;
             border: 1px solid #475569;
@@ -276,17 +309,17 @@
             text-align: left;
         }
 
-        .game-option:hover {
+        .quiz-option:hover {
             border-color: #38bdf8;
         }
 
-        #game-feedback {
+        #quiz-feedback {
             font-size: 0.9rem;
             min-height: 20px;
-            margin-bottom: 10px;
+            margin-bottom: 8px;
         }
 
-        #game-next-btn {
+        #quiz-next-btn {
             margin-top: 4px;
             padding: 8px 16px;
             border-radius: 999px;
@@ -297,60 +330,98 @@
             color: #022c22;
         }
 
-        #game-next-btn:hover {
-            filter: brightness(1.05);
+        /* Flashcards */
+        #flashcard-box {
+            text-align: left;
         }
 
-        /* Testimonials / CTA */
-        .testimonials {
-            display: grid;
-            grid-template-columns: repeat(3, minmax(0,1fr));
-            gap: 20px;
+        #flash-word {
+            font-size: 1.1rem;
+            margin-bottom: 6px;
         }
 
-        .quote {
+        #flash-translation {
+            font-size: 1rem;
+            margin-bottom: 6px;
+        }
+
+        #flash-example {
             font-size: 0.9rem;
             color: #cbd5f5;
+            margin-bottom: 10px;
+        }
+
+        .flash-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .flash-btn {
+            padding: 8px 16px;
+            border-radius: 999px;
+            border: 1px solid #475569;
+            background: #020617;
+            color: #e5e7eb;
+            font-size: 0.85rem;
+            cursor: pointer;
+        }
+
+        .flash-btn.primary {
+            border-color: #38bdf8;
+        }
+
+        /* Sentence builder */
+        #sb-instruction {
+            font-size: 0.9rem;
             margin-bottom: 8px;
         }
 
-        .quote-name {
-            font-size: 0.82rem;
-            color: #9ca3af;
+        #sb-sentence-target {
+            font-size: 1.02rem;
+            margin-bottom: 10px;
         }
 
-        .cta {
-            margin-top: 30px;
-            background: linear-gradient(135deg, #2563eb, #38bdf8);
-            padding: 24px 20px;
-            border-radius: 20px;
+        #sb-built-sentence {
+            min-height: 24px;
+            padding: 8px 10px;
+            border-radius: 10px;
+            background: #020617;
+            border: 1px solid #475569;
+            font-size: 0.95rem;
+            margin-bottom: 10px;
+        }
+
+        #sb-word-pool {
             display: flex;
             flex-wrap: wrap;
-            align-items: center;
-            justify-content: space-between;
-            gap: 14px;
+            gap: 8px;
+            margin-bottom: 10px;
         }
 
-        .cta h3 {
-            font-size: 1.25rem;
-        }
-
-        .cta p {
-            font-size: 0.9rem;
-            max-width: 550px;
-        }
-
-        /* Kontakt (ohne echtes Formular, Platzhalter) */
-        .contact-box {
+        .sb-word {
+            padding: 6px 10px;
+            border-radius: 999px;
             background: #020617;
-            border-radius: 16px;
-            padding: 18px;
-            border: 1px solid rgba(148,163,184,0.4);
+            border: 1px solid #475569;
+            font-size: 0.85rem;
+            cursor: pointer;
         }
 
-        .contact-box p {
+        .sb-word:hover {
+            border-color: #38bdf8;
+        }
+
+        .sb-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 8px;
+        }
+
+        #sb-feedback {
             font-size: 0.9rem;
-            color: #cbd5f5;
+            min-height: 20px;
         }
 
         /* Footer */
@@ -362,7 +433,7 @@
             margin-top: 30px;
         }
 
-        footer .footer-inner {
+        .footer-inner {
             max-width: 1200px;
             margin: 0 auto;
             display: flex;
@@ -378,15 +449,14 @@
         /* Responsive */
         @media (max-width: 900px) {
             .hero {
-                grid-template-columns: minmax(0, 1fr);
-            }
-
-            .grid-3,
-            .testimonials {
                 grid-template-columns: minmax(0,1fr);
             }
 
-            #game-options {
+            .grid-3 {
+                grid-template-columns: minmax(0,1fr);
+            }
+
+            #quiz-options {
                 grid-template-columns: minmax(0,1fr);
             }
 
@@ -405,10 +475,10 @@
         <div class="logo">English<span>Galaxy</span></div>
         <nav>
             <ul>
-                <li><a href="#kurse">Kurse</a></li>
-                <li><a href="#spiel">Spiel</a></li>
-                <li><a href="#vorteile">Vorteile</a></li>
-                <li><a href="#kontakt" class="btn-nav">Kontakt</a></li>
+                <li><a href="#start">Home</a></li>
+                <li><a href="#courses">Courses</a></li>
+                <li><a href="#games">Games</a></li>
+                <li><a href="#contact" class="btn-nav">Contact</a></li>
             </ul>
         </nav>
     </div>
@@ -419,145 +489,159 @@
     <section class="hero" id="start">
         <div>
             <h1 class="hero-title">
-                Englisch lernen mit <span>EnglishGalaxy</span>.
+                Learn English with <span>EnglishGalaxy</span>.
             </h1>
             <p class="hero-text">
-                Interaktive Lektionen, Vokabeltrainer, Grammatik-Erklärungen, ein eingebautes Lernspiel
-                und klare Lernziele für Schule, Studium und Beruf. Alles in einer modernen Oberfläche.
+                Short lessons, smart vocabulary training and fun mini–games.  
+                Perfect for daily practice – at school, at home or on the go.
             </p>
             <div class="hero-actions">
-                <button class="btn-primary" onclick="scrollToSection('spiel')">Jetzt mit dem Spiel starten</button>
-                <button class="btn-secondary" onclick="scrollToSection('kurse')">Alle Kurse ansehen</button>
+                <button class="btn-primary" onclick="scrollToSection('games')">Play & learn now</button>
+                <button class="btn-secondary" onclick="scrollToSection('courses')">Explore all skills</button>
             </div>
             <p class="hero-meta">
-                ✓ Level A1–C1 &nbsp;•&nbsp; ✓ Für Schüler:innen, Azubis & Studierende &nbsp;•&nbsp; ✓ Perfekt zum täglichen Üben
+                Levels A1–C1 • Vocabulary • Grammar • Speaking • Games
             </p>
         </div>
 
         <aside class="hero-card">
-            <span class="pill">Dein Tagesziel heute</span>
-            <h3>Mini-Plan (Beispiel)</h3>
+            <span class="pill">Your learning plan for today</span>
+            <h3>Example daily routine</h3>
             <ul>
-                <li>📚 1 Grammatiklektion: Present Simple</li>
-                <li>🧠 15 neue Vokabeln wiederholen</li>
-                <li>🎧 1 Hörübung „At the airport“</li>
-                <li>🎮 1 Runde EnglishGalaxy-Quiz spielen</li>
+                <li>📚 1 short grammar lesson</li>
+                <li>🧠 10 new vocabulary items</li>
+                <li>🎮 2 rounds of EnglishGalaxy games</li>
+                <li>✍️ Write one short sentence in English</li>
             </ul>
         </aside>
     </section>
 
-    <!-- KURSE & INHALTE -->
-    <section id="kurse">
-        <h2 class="section-title">Unsere Lernbereiche</h2>
+    <!-- COURSES / AREAS -->
+    <section id="courses">
+        <h2 class="section-title">What you can practise here</h2>
         <p class="section-subtitle">
-            EnglishGalaxy ist in kurze, übersichtliche Module eingeteilt. So kannst du jeden Tag in kleinen
-            Schritten lernen – und behältst trotzdem den Überblick über deinen Fortschritt.
+            This page is only the start. You can use it as a base for your own full learning platform.
+            The focus here: vocabulary, grammar and real sentences – always with games.
         </p>
 
         <div class="grid-3">
             <article class="card">
-                <h3>Vokabel-Module</h3>
-                <p>Lerne Wörter zu Alltagsthemen wie Reisen, Schule, Arbeit oder Small Talk – mit Beispielsätzen
-                    und Audio.</p>
-                <p><strong>Beispiel-Themen:</strong> „At the supermarket“, „Describing people“, „Online meetings“.</p>
-                <span class="tag">Wortschatz</span>
+                <h3>Vocabulary Boost</h3>
+                <p>Learn useful words for school, travel and everyday life.  
+                    German translations help you understand quickly.</p>
+                <p><strong>Examples:</strong> food, family, hobbies, school life, travel and more.</p>
+                <span class="tag">Words & phrases</span>
             </article>
             <article class="card">
-                <h3>Grammatik-Kurse</h3>
-                <p>Kurze Erklärungen auf Deutsch, viele Beispiele auf Englisch und direkt danach kleine Übungen,
-                    die du im Browser lösen kannst.</p>
-                <p><strong>Inhalte:</strong> Zeiten, Fragen bilden, If-Sätze, Passiv, reported speech u.v.m.</p>
-                <span class="tag">Regeln verstehen</span>
+                <h3>Grammar in small steps</h3>
+                <p>Each game focuses on one simple structure: present simple, questions, word order
+                    and short sentences.</p>
+                <p>Add your own links to worksheets, videos or PDF lessons later.</p>
+                <span class="tag">Structure</span>
             </article>
             <article class="card">
-                <h3>Listening & Speaking</h3>
-                <p>Dialoge mit Transkript, Verständnisfragen und Sprechimpulsen – ideal für Prüfungsvorbereitung
-                    oder Alltagssituationen.</p>
-                <p><strong>Extras:</strong> Satzbausteine, Redemittel, kleine Rollenspiele.</p>
-                <span class="tag">Hören & Sprechen</span>
+                <h3>Real communication</h3>
+                <p>Live practice is important. Use the sentence builder to create real English sentences,
+                    not just single words.</p>
+                <p>Great for warm-ups in class or quick homework.</p>
+                <span class="tag">Speaking & writing</span>
             </article>
         </div>
     </section>
 
-    <!-- SPIEL -->
-    <section id="spiel">
-        <h2 class="section-title">Lernspiel: Vokabel-Quiz</h2>
+    <!-- GAMES SECTION -->
+    <section id="games">
+        <h2 class="section-title">Game zone – learn by playing</h2>
         <p class="section-subtitle">
-            Spiele eine kurze Runde und teste, wie gut du einfache englische Wörter auf Deutsch übersetzen kannst.
-            Wähle die richtige Antwort und verbessere Schritt für Schritt deinen Wortschatz.
+            Here you can try three different games: a multiple-choice vocabulary quiz, digital flashcards,
+            and a sentence builder game. All three help you learn real English step by step.
         </p>
 
-        <div id="game-container">
-            <div id="game-status">
-                <span id="game-progress">Frage 1 von 1</span>
-                <span id="game-score">Punkte: 0</span>
+        <div class="games-nav">
+            <button onclick="scrollToInner('quiz-game')">1. Vocabulary Quiz</button>
+            <button onclick="scrollToInner('flashcards-game')">2. Flashcards</button>
+            <button onclick="scrollToInner('sentence-game')">3. Sentence Builder</button>
+        </div>
+
+        <!-- GAME 1: VOCAB QUIZ -->
+        <div class="game-block" id="quiz-game">
+            <h3 class="game-title">Game 1: Vocabulary Quiz (German ➝ English)</h3>
+            <p class="game-description">
+                Read the German word and choose the correct English translation.  
+                A simple way to train your vocabulary with points.
+            </p>
+
+            <div id="quiz-status">
+                <span id="quiz-progress">Question 1 of 1</span>
+                <span id="quiz-score">Score: 0</span>
             </div>
+            <div id="quiz-question">Your question will appear here…</div>
+            <div id="quiz-options"></div>
+            <div id="quiz-feedback"></div>
+            <button id="quiz-next-btn">Next question</button>
+        </div>
 
-            <div id="game-question">Hier erscheint gleich die Frage…</div>
+        <!-- GAME 2: FLASHCARDS -->
+        <div class="game-block" id="flashcards-game" style="margin-top:24px;">
+            <h3 class="game-title">Game 2: Vocabulary Flashcards</h3>
+            <p class="game-description">
+                First read the English word and try to remember the German translation.  
+                Then flip the card to check yourself. Great for quick revision.
+            </p>
 
-            <div id="game-options">
-                <!-- Buttons werden per JavaScript erzeugt -->
+            <div id="flashcard-box">
+                <div id="flash-word"><strong>Word:</strong> –</div>
+                <div id="flash-translation"><strong>German:</strong> (hidden)</div>
+                <div id="flash-example"><strong>Example:</strong> –</div>
+
+                <div class="flash-buttons">
+                    <button class="flash-btn primary" id="flash-show-btn">Show translation</button>
+                    <button class="flash-btn" id="flash-next-btn">Next word</button>
+                </div>
             </div>
+        </div>
 
-            <div id="game-feedback"></div>
+        <!-- GAME 3: SENTENCE BUILDER -->
+        <div class="game-block" id="sentence-game" style="margin-top:24px;">
+            <h3 class="game-title">Game 3: Sentence Builder</h3>
+            <p class="game-description">
+                Build a correct English sentence by clicking on the words in the right order.
+                Very useful to practise basic grammar and word order.
+            </p>
 
-            <button id="game-next-btn">Nächste Frage</button>
+            <div id="sb-instruction">
+                Click on the words below to build the sentence. Then press “Check”.
+            </div>
+            <div id="sb-sentence-target"></div>
+            <div id="sb-built-sentence"></div>
+            <div id="sb-word-pool"></div>
+
+            <div class="sb-buttons">
+                <button class="flash-btn primary" id="sb-check-btn">Check</button>
+                <button class="flash-btn" id="sb-clear-btn">Clear</button>
+                <button class="flash-btn" id="sb-next-btn">Next sentence</button>
+            </div>
+            <div id="sb-feedback"></div>
         </div>
     </section>
 
-    <!-- VORTEILE / TESTIMONIALS -->
-    <section id="vorteile">
-        <h2 class="section-title">Warum EnglishGalaxy?</h2>
+    <!-- CONTACT / IDEAS -->
+    <section id="contact">
+        <h2 class="section-title">Next steps for your website</h2>
         <p class="section-subtitle">
-            Wir kombinieren klare Strukturen mit spielerischen Elementen. So bleibst du motiviert und siehst sofort,
-            was du schon kannst – und was du noch üben möchtest.
+            This page can grow with you. Later you can add a login area, real user accounts, homework tracking
+            or links to worksheets and videos.
         </p>
 
-        <div class="testimonials">
-            <div class="card">
-                <p class="quote">„Ich nutze EnglishGalaxy jeden Tag 10 Minuten vor der Schule. Durch das Spiel
-                    wiederhole ich Vokabeln viel lieber als mit Karteikarten.“</p>
-                <p class="quote-name">– Lea, 9. Klasse</p>
-            </div>
-            <div class="card">
-                <p class="quote">„Die Grammatik-Erklärungen sind kurz und verständlich, perfekt für die Vorbereitung
-                    auf meine Zwischenprüfung.“</p>
-                <p class="quote-name">– Jonas, Auszubildender</p>
-            </div>
-            <div class="card">
-                <p class="quote">„Mir gefällt, dass ich auf Deutsch nachlesen kann, aber trotzdem sehr viel Englisch sehe.“</p>
-                <p class="quote-name">– Mira, Berufseinsteigerin</p>
-            </div>
-        </div>
-
-        <div class="cta">
-            <div>
-                <h3>Bereit für deine eigene Englisch-Galaxie?</h3>
-                <p>
-                    Baue dir Schritt für Schritt deinen Wortschatz und deine Grammatik auf. Spiele das Quiz,
-                    wiederhole Vokabeln und setze dir kleine, erreichbare Ziele. Du kannst diese Seite später
-                    beliebig mit weiteren Unterseiten, Login-Bereich oder echten Übungen erweitern.
-                </p>
-            </div>
-            <button class="btn-primary" onclick="scrollToSection('spiel')">Noch eine Runde spielen</button>
-        </div>
-    </section>
-
-    <!-- KONTAKT (Platzhalter) -->
-    <section id="kontakt">
-        <h2 class="section-title">Kontakt & Ideen</h2>
-        <p class="section-subtitle">
-            Diese Seite ist dein Startpunkt. Wenn du sie weiterentwickelst, kannst du hier ein echtes Kontaktformular,
-            Social-Media-Links oder einen Newsletter einbauen.
-        </p>
-
-        <div class="contact-box">
-            <p><strong>Ideen für später:</strong></p>
+        <div class="card">
+            <p style="font-size:0.9rem; color:#cbd5f5;">
+                Ideas you could add:
+            </p>
             <ul style="margin-left:18px; margin-top:8px; font-size:0.9rem; color:#cbd5f5;">
-                <li>Kontaktformular mit Name, E-Mail und Nachricht</li>
-                <li>Anmeldung für einen kostenlosen Einstufungstest</li>
-                <li>Download-Bereich mit PDFs und Übungen</li>
-                <li>Login/Registrierung für Schüler:innen</li>
+                <li>A real contact form with name, email and message</li>
+                <li>A “Word of the day” box that changes daily</li>
+                <li>Separate pages for grammar, vocabulary lists and tests</li>
+                <li>Progress bars for each student or class</li>
             </ul>
         </div>
     </section>
@@ -565,18 +649,18 @@
 
 <footer>
     <div class="footer-inner">
-        <span>© 2025 EnglishGalaxy – Deine Plattform zum Englischlernen</span>
+        <span>© 2025 EnglishGalaxy – Learn English with games</span>
         <span>
-            <a href="#">Impressum</a>
-            <a href="#">Datenschutz</a>
-            <a href="#">AGB</a>
+            <a href="#">Imprint</a>
+            <a href="#">Privacy</a>
+            <a href="#">Terms</a>
         </span>
     </div>
 </footer>
 
-<!-- JavaScript für Spiel und Scroll -->
+<!-- JavaScript: scrolling + games -->
 <script>
-    // sanftes Scrollen zu Sektionen
+    // Smooth scroll to main sections
     function scrollToSection(id) {
         const el = document.getElementById(id);
         if (el) {
@@ -584,86 +668,64 @@
         }
     }
 
-    // Vokabel-Quiz-Daten
-    const quizQuestions = [
-        {
-            german: "Haus",
-            options: ["house", "mouse", "car", "tree"],
-            correctIndex: 0
-        },
-        {
-            german: "Freund",
-            options: ["friend", "family", "boss", "team"],
-            correctIndex: 0
-        },
-        {
-            german: "Schule",
-            options: ["ship", "school", "shoe", "shop"],
-            correctIndex: 1
-        },
-        {
-            german: "Buch",
-            options: ["back", "book", "bank", "bike"],
-            correctIndex: 1
-        },
-        {
-            german: "Lehrer",
-            options: ["teacher", "driver", "doctor", "waiter"],
-            correctIndex: 0
-        },
-        {
-            german: "Stadt",
-            options: ["seat", "side", "city", "street"],
-            correctIndex: 2
-        },
-        {
-            german: "Wasser",
-            options: ["window", "weather", "water", "wall"],
-            correctIndex: 2
-        },
-        {
-            german: "Frühstück",
-            options: ["breakfast", "dinner", "lunch", "snack"],
-            correctIndex: 0
+    // Smooth scroll inside games section
+    function scrollToInner(id) {
+        const el = document.getElementById(id);
+        if (el) {
+            el.scrollIntoView({ behavior: "smooth", block: "start" });
         }
+    }
+
+    /* =========================
+       GAME 1 – VOCABULARY QUIZ
+       ========================= */
+
+    const quizQuestions = [
+        { german: "Haus", options: ["house", "mouse", "car", "tree"], correctIndex: 0 },
+        { german: "Freund", options: ["friend", "family", "boss", "team"], correctIndex: 0 },
+        { german: "Schule", options: ["ship", "school", "shoe", "shop"], correctIndex: 1 },
+        { german: "Buch", options: ["back", "book", "bank", "bike"], correctIndex: 1 },
+        { german: "Lehrer", options: ["teacher", "driver", "doctor", "waiter"], correctIndex: 0 },
+        { german: "Stadt", options: ["seat", "side", "city", "street"], correctIndex: 2 },
+        { german: "Wasser", options: ["window", "weather", "water", "wall"], correctIndex: 2 },
+        { german: "Frühstück", options: ["breakfast", "dinner", "lunch", "snack"], correctIndex: 0 }
     ];
 
-    let currentQuestionIndex = 0;
-    let score = 0;
-    let questionAnswered = false;
+    let quizIndex = 0;
+    let quizScore = 0;
+    let quizAnswered = false;
 
-    const progressEl = document.getElementById("game-progress");
-    const scoreEl = document.getElementById("game-score");
-    const questionEl = document.getElementById("game-question");
-    const optionsContainer = document.getElementById("game-options");
-    const feedbackEl = document.getElementById("game-feedback");
-    const nextBtn = document.getElementById("game-next-btn");
+    const quizProgressEl = document.getElementById("quiz-progress");
+    const quizScoreEl = document.getElementById("quiz-score");
+    const quizQuestionEl = document.getElementById("quiz-question");
+    const quizOptionsEl = document.getElementById("quiz-options");
+    const quizFeedbackEl = document.getElementById("quiz-feedback");
+    const quizNextBtn = document.getElementById("quiz-next-btn");
 
-    function loadQuestion() {
-        const q = quizQuestions[currentQuestionIndex];
-        questionAnswered = false;
+    function loadQuizQuestion() {
+        const q = quizQuestions[quizIndex];
+        quizAnswered = false;
 
-        progressEl.textContent = "Frage " + (currentQuestionIndex + 1) + " von " + quizQuestions.length;
-        questionEl.textContent = "Wie heißt auf Englisch: \"" + q.german + "\"?";
-        feedbackEl.textContent = "";
+        quizProgressEl.textContent = "Question " + (quizIndex + 1) + " of " + quizQuestions.length;
+        quizQuestionEl.textContent = "What is the correct English word for: \"" + q.german + "\"?";
+        quizFeedbackEl.textContent = "";
+        quizOptionsEl.innerHTML = "";
 
-        // Optionen neu aufbauen
-        optionsContainer.innerHTML = "";
         q.options.forEach((optionText, index) => {
             const btn = document.createElement("button");
-            btn.className = "game-option";
+            btn.className = "quiz-option";
             btn.textContent = optionText;
-            btn.addEventListener("click", () => handleAnswer(index));
-            optionsContainer.appendChild(btn);
+            btn.addEventListener("click", () => handleQuizAnswer(index));
+            quizOptionsEl.appendChild(btn);
         });
     }
 
-    function handleAnswer(selectedIndex) {
-        if (questionAnswered) return;
-        questionAnswered = true;
+    function handleQuizAnswer(selectedIndex) {
+        if (quizAnswered) return;
+        quizAnswered = true;
 
-        const q = quizQuestions[currentQuestionIndex];
-        const buttons = optionsContainer.querySelectorAll("button");
+        const q = quizQuestions[quizIndex];
+        const buttons = quizOptionsEl.querySelectorAll("button");
 
         buttons.forEach((btn, idx) => {
             if (idx === q.correctIndex) {
@@ -676,40 +738,168 @@
         });
 
         if (selectedIndex === q.correctIndex) {
-            score++;
-            feedbackEl.style.color = "#22c55e";
-            feedbackEl.textContent = "Richtig! 🎉";
+            quizScore++;
+            quizFeedbackEl.style.color = "#22c55e";
+            quizFeedbackEl.textContent = "Correct! 🎉";
         } else {
-            feedbackEl.style.color = "#f97316";
-            feedbackEl.textContent =
-                "Leider falsch. Richtig ist: \"" + q.options[q.correctIndex] + "\".";
+            quizFeedbackEl.style.color = "#f97316";
+            quizFeedbackEl.textContent =
+                "Not quite. The correct answer is \"" + q.options[q.correctIndex] + "\".";
         }
 
-        scoreEl.textContent = "Punkte: " + score;
+        quizScoreEl.textContent = "Score: " + quizScore;
     }
 
-    nextBtn.addEventListener("click", () => {
-        if (currentQuestionIndex < quizQuestions.length - 1) {
-            currentQuestionIndex++;
-            loadQuestion();
+    quizNextBtn.addEventListener("click", () => {
+        if (quizIndex < quizQuestions.length - 1) {
+            quizIndex++;
+            loadQuizQuestion();
         } else {
-            // Spiel beendet
-            feedbackEl.style.color = "#38bdf8";
-            feedbackEl.textContent =
-                "Spiel beendet! Du hast " + score + " von " + quizQuestions.length + " Punkten erreicht.";
-            questionEl.textContent = "Super gemacht! Möchtest du noch einmal spielen?";
-            optionsContainer.innerHTML = "";
-            nextBtn.textContent = "Nochmal spielen";
-            currentQuestionIndex = 0;
-            score = 0;
-            scoreEl.textContent = "Punkte: " + score;
+            quizFeedbackEl.style.color = "#38bdf8";
+            quizFeedbackEl.textContent =
+                "Game finished! You scored " + quizScore + " out of " + quizQuestions.length + ".";
+            quizQuestionEl.textContent = "Great job! Do you want to play again?";
+            quizOptionsEl.innerHTML = "";
+            quizNextBtn.textContent = "Play again";
+            quizIndex = 0;
+            quizScore = 0;
+            quizScoreEl.textContent = "Score: 0";
         }
     });
 
-    // erste Frage laden
-    loadQuestion();
+    /* =========================
+       GAME 2 – FLASHCARDS
+       ========================= */
+
+    const flashcards = [
+        { english: "airport", german: "Flughafen", example: "We arrived at the airport early." },
+        { english: "tired", german: "müde", example: "I am tired after school." },
+        { english: "homework", german: "Hausaufgaben", example: "I always do my homework in the evening." },
+        { english: "breakfast", german: "Frühstück", example: "She never skips breakfast." },
+        { english: "teacher", german: "Lehrer / Lehrerin", example: "Our English teacher is very friendly." },
+        { english: "busy", german: "beschäftigt", example: "My parents are busy during the week." },
+        { english: "rainy", german: "regnerisch", example: "It is a rainy day today." }
+    ];
+
+    let flashIndex = 0;
+    let flashShow = false;
+
+    const flashWordEl = document.getElementById("flash-word");
+    const flashTranslationEl = document.getElementById("flash-translation");
+    const flashExampleEl = document.getElementById("flash-example");
+    const flashShowBtn = document.getElementById("flash-show-btn");
+    const flashNextBtn = document.getElementById("flash-next-btn");
+
+    function loadFlashcard() {
+        const card = flashcards[flashIndex];
+        flashShow = false;
+
+        flashWordEl.innerHTML = "<strong>Word:</strong> " + card.english;
+        flashTranslationEl.innerHTML = "<strong>German:</strong> (hidden)";
+        flashExampleEl.innerHTML = "<strong>Example:</strong> " + card.example;
+    }
+
+    flashShowBtn.addEventListener("click", () => {
+        const card = flashcards[flashIndex];
+        flashTranslationEl.innerHTML = "<strong>German:</strong> " + card.german;
+    });
+
+    flashNextBtn.addEventListener("click", () => {
+        flashIndex = (flashIndex + 1) % flashcards.length;
+        loadFlashcard();
+    });
+
+    /* =========================
+       GAME 3 – SENTENCE BUILDER
+       ========================= */
+
+    const sentenceItems = [
+        { sentence: "I like learning English.", words: ["I", "like", "learning", "English."] },
+        { sentence: "My brother plays football.", words: ["My", "brother", "plays", "football."] },
+        { sentence: "We are going to school.", words: ["We", "are", "going", "to", "school."] },
+        { sentence: "She lives in a small town.", words: ["She", "lives", "in", "a", "small", "town."] },
+        { sentence: "Can you help me, please?", words: ["Can", "you", "help", "me,", "please?"] }
+    ];
+
+    let sbIndex = 0;
+    let sbCurrentWords = [];
+
+    const sbTargetEl = document.getElementById("sb-sentence-target");
+    const sbBuiltEl = document.getElementById("sb-built-sentence");
+    const sbPoolEl = document.getElementById("sb-word-pool");
+    const sbFeedbackEl = document.getElementById("sb-feedback");
+    const sbCheckBtn = document.getElementById("sb-check-btn");
+    const sbClearBtn = document.getElementById("sb-clear-btn");
+    const sbNextBtn = document.getElementById("sb-next-btn");
+
+    function shuffleArray(arr) {
+        const copy = arr.slice();
+        for (let i = copy.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [copy[i], copy[j]] = [copy[j], copy[i]];
+        }
+        return copy;
+    }
+
+    function loadSentence() {
+        const item = sentenceItems[sbIndex];
+        sbCurrentWords = [];
+        sbFeedbackEl.textContent = "";
+        sbFeedbackEl.style.color = "#e5e7eb";
+
+        sbTargetEl.textContent = "Target sentence (correct order): " + item.sentence;
+        sbBuiltEl.textContent = "";
+        sbPoolEl.innerHTML = "";
+
+        const shuffled = shuffleArray(item.words);
+        shuffled.forEach(word => {
+            const btn = document.createElement("button");
+            btn.className = "sb-word";
+            btn.textContent = word;
+            btn.addEventListener("click", () => {
+                sbCurrentWords.push(word);
+                sbBuiltEl.textContent = sbCurrentWords.join(" ");
+                btn.disabled = true;
+            });
+            sbPoolEl.appendChild(btn);
+        });
+    }
+
+    sbCheckBtn.addEventListener("click", () => {
+        const item = sentenceItems[sbIndex];
+        const built = sbCurrentWords.join(" ");
+        if (!built) {
+            sbFeedbackEl.style.color = "#f97316";
+            sbFeedbackEl.textContent = "Build a sentence first.";
+            return;
+        }
+        if (built === item.sentence) {
+            sbFeedbackEl.style.color = "#22c55e";
+            sbFeedbackEl.textContent = "Great! That is the correct sentence. ✅";
+        } else {
+            sbFeedbackEl.style.color = "#f97316";
+            sbFeedbackEl.textContent = "Not correct yet. Compare with the target sentence above and try again.";
+        }
+    });
+
+    sbClearBtn.addEventListener("click", () => {
+        loadSentence();
+    });
+
+    sbNextBtn.addEventListener("click", () => {
+        sbIndex = (sbIndex + 1) % sentenceItems.length;
+        loadSentence();
+    });
+
+    /* ===========
+       INIT
+       =========== */
+
+    // Start all games when page loads
+    loadQuizQuestion();
+    loadFlashcard();
+    loadSentence();
 </script>
 
 </body>
 </html>
-
